@@ -2,6 +2,8 @@
 __author__ = "Ashad Nadeem Mahmudi"
 __date__ = "9/24/2020"
 
+import requests
+
 import read
 import emails
 
@@ -9,7 +11,15 @@ def send_emails(name, message, mail_server):
     mail_server.send_message(message)
     print("Email Sent to {} : successfull".format(name))
 
+def connected_to_internet():
+    try:
+        response = requests.get("http://www.google.com.pk")
+    except:
+        print("Internet Connectivity Not Found")
+        exit(0)
+
 if __name__ == '__main__':
+    connected_to_internet()
     data = read.Data("email_list.csv")
     body = read.getBody("email_body.txt")
     sender = input("Please Enter Sender's Gmail: ")
